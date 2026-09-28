@@ -27,14 +27,26 @@ p 0 0 part0
 
 Several parts play in order, one line each. Frameo's original animation, for example, uses five parts, with `p 1 8 part1` pausing 8 frames at the end of `part1`.
 
+### Orientation
+
+Frameo frames run Android in **landscape**: the original Frameo animation is declared as `1280 800`. If your frame hangs vertically, as in Fioriture Sintetiche, draw the animation **rotated 90° counter-clockwise** so it appears upright. The example animation is stored this way. With ImageMagick, rotate every frame after extracting it:
+
+```sh
+magick mogrify -rotate -90 part0/*.png
+```
+
+`desc.txt` always uses the size of the stored, rotated frames: `870 433` for the example. The boot logo is not affected: it is drawn directly in the panel's portrait orientation (800 × 1280).
+
 ### From a video
 
-Extract the frames with [FFmpeg](https://ffmpeg.org/download.html), scaled to your chosen size:
+Extract the frames with [FFmpeg](https://ffmpeg.org/download.html), scaled to your chosen size. For a frame hanging vertically, start from a portrait video and let FFmpeg rotate it 90° counter-clockwise (`transpose=2`):
 
 ```sh
 mkdir part0
-ffmpeg -i animation.mp4 -vf "fps=20,scale=870:433" part0/%09d.png
+ffmpeg -i animation.mp4 -vf "fps=20,scale=433:870,transpose=2" part0/%09d.png
 ```
+
+For a frame used horizontally, drop the rotation: `-vf "fps=20,scale=870:433"`.
 
 ### Build the zip
 

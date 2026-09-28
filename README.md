@@ -1,8 +1,8 @@
 <div align="center">
 
-# Frame Boot Animation and Image Changer
+# Frameo Boot Animation and Image Changer
 
-### Replace the boot logo and boot animation of Android digital photo frames
+### Replace the boot logo and boot animation of Frameo digital photo frames
 
 <img src="images/fioriture-sintetiche.jpg" alt="Fioriture Sintetiche: a digital frame planted in a terracotta pot, showing a flowering plant" width="560">
 
@@ -10,15 +10,17 @@ _Fioriture Sintetiche by [Matteo Mandelli](https://matteomandelli.com). [Watch t
 
 </div>
 
-Step-by-step guides to change the **boot logo** and the **boot animation** on Android-based digital photo frames, such as Frameo frames, using the frame's Rockchip or Allwinner chip.
+Step-by-step guides to change the **boot logo** and the **boot animation** on [Frameo](https://frameo.net) digital photo frames. Frameo frames run Android on a Rockchip or Allwinner chip; there is a guide for each.
 
-It was made for **[Fioriture Sintetiche](https://matteomandelli.com)**, an art project by Matteo Mandelli: digital frames planted in pots become synthetic flowers. The frames had to start with the artwork's own logo and animation instead of the manufacturer's branding, so the installation looks like one piece from the moment it switches on.
+It was made for **[Fioriture Sintetiche](https://matteomandelli.com)**, an art project by Matteo Mandelli: digital frames planted in pots become synthetic flowers. The frames had to start with the artwork's own logo and animation instead of the Frameo branding, so the installation looks like one piece from the moment it switches on.
 
 Working this out took a long time: the information was spread across old forum threads, tools documented only in Russian or Chinese, and firmware layouts that differ between chips. These guides collect the exact procedure that worked.
 
 | Boot logo | Boot animation |
 | :-------: | :------------: |
-| <img src="images/logo-preview.png" alt="Fioriture Sintetiche boot logo" width="200"> | <img src="images/bootanimation-preview.png" alt="A frame of the watering-can boot animation" width="320"> |
+| <img src="images/logo-preview.png" alt="Fioriture Sintetiche boot logo on the portrait screen" width="240"> | <img src="images/bootanimation-preview.gif" alt="Animated watering can, as it appears on the portrait screen" width="240"> |
+
+_Both as they appear on the frame, mounted vertically._
 
 ## Guides
 
@@ -70,7 +72,7 @@ The [`examples`](examples) folder has the files used for Fioriture Sintetiche. T
 | File | Format |
 | ---- | ------ |
 | `rockchip/logo.bmp` | 800 × 1280, 24-bit BMP3 |
-| `rockchip/bootanimation.zip` | 870 × 433 at 20 fps, one looping part, stored without compression |
+| `rockchip/bootanimation.zip` | 870 × 433 at 20 fps, one looping part, stored without compression. Drawn rotated 90°: see [orientation](guides/create-your-own.md#orientation) |
 | `allwinner/bootlogo.bmp` | 800 × 1280, 24-bit BMP, rotated 180° to match the panel |
 
 ## Credits
@@ -78,6 +80,8 @@ The [`examples`](examples) folder has the files used for Fioriture Sintetiche. T
 - **Artwork:** Fioriture Sintetiche logo and animation © [Matteo Mandelli](https://matteomandelli.com), used with permission. Not covered by the license below.
 - **Tools:** Chainfire (adbd Insecure), RedScorpio (rkDumper, imgRePackerRK), Rockchip (RKDevTool, DriverAssistant) and the [XDA Developers](https://xdaforums.com) community, where these tools and much of this knowledge come from.
 - **Guides:** [Davide Gaglione](https://github.com/DavideWasTaken).
+
+Frameo is a trademark of its owner. This project is independent and not affiliated with or endorsed by Frameo.
 
 ## License
 

@@ -24,14 +24,14 @@ adb push bootanimation.zip /sdcard/bootanimation.zip
 
 ## 3. Replace the originals
 
-In the file manager on the frame, enable root access and find the original files. Their names are self-explanatory and the file manager's search finds them straight away:
+In the file manager on the frame, enable root access and look for the original files. We did not record the exact folders on our frame, but they are easy to find: follow the folder names, or search for the file names.
 
-| File | Where it is |
-| ---- | ----------- |
+| File | Where to look |
+| ---- | ------------- |
 | `bootanimation.zip` | `/system/media/`, as on any Android device |
-| `bootlogo.bmp` | The bootloader partition: search for `bootlogo.bmp` to find its folder |
+| `bootlogo.bmp` | `/system/media/` too: Allwinner's reference firmware [copies it there](https://github.com/realthunder/a33_android_device_astar/blob/master/astar_y3.mk). The bootloader also keeps a copy in the `bootloader` partition, a FAT partition at `/dev/block/by-name/bootloader` ([example](https://github.com/realthunder/a33_android_device_astar/blob/master/recovery.fstab)). |
 
-**Rename each original** to keep a backup (for example `bootanimationFRAMEO.zip`), then move the new file from `/sdcard` into the same folder. Reboot the frame.
+**Rename each original** to keep a backup (for example `bootanimationFRAMEO.zip`), then move the new file from `/sdcard` into the same folder, with the same name. Reboot the frame.
 
 ## The logo is upside down
 
