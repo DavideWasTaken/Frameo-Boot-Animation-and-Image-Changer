@@ -24,7 +24,14 @@ adb push bootanimation.zip /sdcard/bootanimation.zip
 
 ## 3. Replace the originals
 
-In the file manager on the frame, enable root access, find the existing `bootlogo.bmp` and `bootanimation.zip`, **rename them** to keep a backup (for example `bootanimationFRAMEO.zip`), then move the new files from `/sdcard` into the same folders. Reboot the frame.
+In the file manager on the frame, enable root access and find the original files. Their names are self-explanatory and the file manager's search finds them straight away:
+
+| File | Where it is |
+| ---- | ----------- |
+| `bootanimation.zip` | `/system/media/`, as on any Android device |
+| `bootlogo.bmp` | The bootloader partition: search for `bootlogo.bmp` to find its folder |
+
+**Rename each original** to keep a backup (for example `bootanimationFRAMEO.zip`), then move the new file from `/sdcard` into the same folder. Reboot the frame.
 
 ## The logo is upside down
 

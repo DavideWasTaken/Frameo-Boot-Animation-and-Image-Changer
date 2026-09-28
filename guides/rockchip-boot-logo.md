@@ -34,7 +34,9 @@ imgRePackerRK.exe resource.img
 
 This creates `resource.img.dump\` with `logo.bmp`, `logo_kernel.bmp` and `rk-kernel.dtb`, and the rebuild recipe `resource.img.cfg`.
 
-> On some firmware the logo is packed inside `boot.img` instead of a separate `resource` partition. The steps are the same with `boot.img`.
+> Work on a copy: rebuilding in step 5 **overwrites `resource.img` in place**, so the file in the rkDumper folder must stay untouched as your backup.
+>
+> Don't edit `boot.img`: on these frames it contains no images, so flashing it does not change the logo.
 
 ## 4. Replace the logo
 
@@ -44,7 +46,9 @@ The new image must match the original **exactly**: same size, same bit depth, sa
 magick identify resource.img.dump\logo.bmp
 ```
 
-On our frame this prints `BMP3 800x1280 … 8-bit sRGB`, a 24-bit Windows 3.x bitmap. Convert your image to the same format ([details](create-your-own.md#boot-logo)) and overwrite **both** `logo.bmp` and `logo_kernel.bmp` in `resource.img.dump\`.
+On our frame this prints `BMP3 800x1280 … 8-bit sRGB`, a 24-bit Windows 3.x bitmap. Convert your image to the same format ([details](create-your-own.md#boot-logo)) and overwrite **both** `logo.bmp` and `logo_kernel.bmp` in `resource.img.dump\`. On our frames they are the same picture.
+
+The entries can differ between firmware versions: one of our frames had `logo.bmp` and `logo_pcba.bmp` instead. There, replace only `logo.bmp` and leave `logo_pcba.bmp` as it is.
 
 ## 5. Rebuild the resource image
 
@@ -52,7 +56,7 @@ On our frame this prints `BMP3 800x1280 … 8-bit sRGB`, a 24-bit Windows 3.x bi
 imgRePackerRK.exe resource.img.cfg
 ```
 
-This writes the new `resource.img` in the imgRePackerRK folder. The original stays safe in the rkDumper `Output\Image` folder.
+This overwrites the copied `resource.img` with the new one. The original stays safe in the rkDumper `Output\Image` folder.
 
 ## 6. Flash the resource partition
 
@@ -64,6 +68,8 @@ This writes the new `resource.img` in the imgRePackerRK folder. The original sta
 
 When the log reports success, the frame reboots with the new logo.
 
+**Several identical frames:** frames of the same model and firmware share the same partition layout, so the same `resource.img` and `config_16.cfg` work for all of them. Dump one frame, then repeat this step for each of the others. For Fioriture Sintetiche a whole batch was flashed this way, about one frame every two minutes.
+
 ## Restore the original
 
 Repeat step 6 with the original `resource.img` from the rkDumper `Output\Image` folder.
@@ -72,6 +78,7 @@ Repeat step 6 with the original `resource.img` from the rkDumper `Output\Image` 
 
 | Symptom | Fix |
 | ------- | --- |
+| Log shows `Error:RKU_Write-->WriteFile failed` | Normal: it appears before every download, including successful ones. |
 | RKDevTool never shows a LOADER device | Reinstall DriverAssistant, try another USB cable or port, and run `adb reboot bootloader` again while RKDevTool is open. |
 | rkDumper does not find the device | Check the frame is in loader mode and the tool runs as administrator. The rkDumper thread reports problems with some newer Rockchip driver versions. |
 | Flash fails right after `Download resource…` | The partition list does not match the frame: load `config_16.cfg` from *your* dump, not someone else's. |
